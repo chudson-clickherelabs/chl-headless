@@ -24,9 +24,7 @@ export async function getStaticPaths() {
     }
   `;
   const data = await fetchQuery(query);
-  const paths = data.pages.nodes.map(node => ({
-    params: { slug: node.slug }
-  }));
+  const paths = data.pages.nodes.filter(node => node.slug !== 'blog').map(node => '/' + node.slug);
   return { paths, fallback: false };
 };
 

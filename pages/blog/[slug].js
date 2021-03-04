@@ -24,10 +24,8 @@ export async function getStaticPaths() {
     }
   `;
   const data = await fetchQuery(query);
-  const paths = data.posts.nodes.map(node => ({
-    params: { slug: node.slug }
-  }));
-  return { paths, fallback: true };
+  const paths = data.posts.nodes.map(node => `/blog/${node.slug}`);
+  return { paths, fallback: false };
 };
 
 export async function getStaticProps({ params }) {
